@@ -23,14 +23,14 @@ const ProductDetailPage = () => {
   const fetchProduct = async () => {
     try {
       setLoading(true)
-      const response = await fetch(`/api/products/${id}`)
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/products/${id}`)
       if (response.ok) {
         const data = await response.json()
         setProduct(data)
         
         // Fetch related products from the same category
         if (data.category) {
-          const relatedResponse = await fetch(`/api/products?category=${encodeURIComponent(data.category)}&per_page=4`)
+          const relatedResponse = await fetch(`${import.meta.env.VITE_API_URL}/products?category=${encodeURIComponent(data.category)}&per_page=4`)
           if (relatedResponse.ok) {
             const relatedData = await relatedResponse.json()
             setRelatedProducts(relatedData.products?.filter(p => p.id !== parseInt(id)) || [])

@@ -10,10 +10,9 @@ export const useCart = () => {
   return context
 }
 
-const API_BASE_URL = '/api'
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
-export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([])
+export const CartProvider = ({ children }) => {  const [cartItems, setCartItems] = useState([])
   const [cartCount, setCartCount] = useState(0)
   const [cartTotal, setCartTotal] = useState(0)
   const [isLoading, setIsLoading] = useState(false)

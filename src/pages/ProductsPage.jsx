@@ -41,7 +41,7 @@ const ProductsPage = () => {
       if (selectedCategory) params.append('category', selectedCategory)
       if (searchQuery) params.append('search', searchQuery)
 
-      const response = await fetch(`/api/products?${params}`)
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/products?${params}`)
       if (response.ok) {
         const data = await response.json()
         setProducts(data.products || [])
@@ -56,11 +56,9 @@ const ProductsPage = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch('/api/products/categories')
-      if (response.ok) {
-        const data = await response.json()
-        setCategories(data.categories || [])
-      }
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/products/categories`)
+      const data = await response.json()
+      setCategories(data.categories || [])
     } catch (error) {
       console.error('Error fetching categories:', error)
     }
